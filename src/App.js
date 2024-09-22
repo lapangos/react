@@ -1,42 +1,23 @@
+import "@fortawesome/fontawesome-free/css/all.min.css";
+import "@trendmicro/react-sidenav/dist/react-sidenav.css";
+import "bootstrap/dist/css/bootstrap.min.css";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import "../src/assets/css/animate.min.css";
+import "../src/assets/css/demo.css";
+import "../src/assets/scss/light-bootstrap-dashboard-react.scss?v=2.0.0";
+import AdminLayout from "../src/layouts/Admin.js";
 import "./App.css";
-import { createChart } from "lightweight-charts";
 
-import React, { Component } from "react";
-
-const chart = createChart(document.body, { width: 400, height: 300 });
-const lineSeries = chart.addLineSeries();
-lineSeries.setData([
-  { time: "2019-04-11", value: 80.01 },
-  { time: "2019-04-12", value: 96.63 },
-  { time: "2019-04-13", value: 76.64 },
-  { time: "2019-04-14", value: 81.89 },
-  { time: "2019-04-15", value: 74.43 },
-  { time: "2019-04-16", value: 80.01 },
-  { time: "2019-04-17", value: 96.63 },
-  { time: "2019-04-18", value: 76.64 },
-  { time: "2019-04-19", value: 81.89 },
-  { time: "2019-04-20", value: 74.43 },
-]);
-
-// Create WebSocket connection.
-// const getWebSocket = () => {
-//   const binanceSocket = new WebSocket(
-//     "wss://stream.binance.com:9443/ws/btcusdt@kline_5m"
-//   );
-//   binanceSocket.addEventListener("message", (event) => {
-//     console.log("Message from server ", event.data);
-//   });
-// };
-
-export default class App extends Component {
-  render() {
-    return (
-      <div>
-        <div>{chart}</div>
-        {/* <div>
-          <button onClick={this.getWebSocket}>Click me!</button>
-        </div> */}
-      </div>
-    );
-  }
+function App() {
+  return (
+    <BrowserRouter>
+      <Routes>
+        {/* <Route path="/home/*" element={<AdminLayout />}></Route> */}
+        <Route path="/home" render={(props) => <AdminLayout {...props} />} />
+        <Route from="/" to="/home/dashboard" />
+      </Routes>
+    </BrowserRouter>
+  );
 }
+
+export default App;
